@@ -24,7 +24,7 @@ function ImageDetails() {
         setLoading(true);
         setError(null);
         
-        const { data } = await axios.get(`/api/images/${id}`);
+        const { data } = await axios.get(`/images/${id}`);
         setImage(data);
         
         // Check if current user has liked the image
@@ -53,7 +53,7 @@ function ImageDetails() {
     }
     
     try {
-      const { data } = await axios.put(`/api/images/${id}/like`);
+      const { data } = await axios.put(`/images/${id}/like`);
       setLiked(!liked);
       setLikesCount(data.likes.length);
       toast.success(liked ? 'Image unliked' : 'Image liked');
@@ -81,7 +81,7 @@ function ImageDetails() {
     try {
       setSubmittingComment(true);
       
-      const { data } = await axios.post(`/api/images/${id}/comment`, { text: comment });
+      const { data } = await axios.post(`/images/${id}/comment`, { text: comment });
       
       // Update image with new comments
       setImage(prevImage => ({
@@ -147,7 +147,7 @@ function ImageDetails() {
     }
     
     try {
-      await axios.delete(`/api/images/${id}`);
+      await axios.delete(`/images/${id}`);
       toast.success('Image deleted successfully');
       navigate('/gallery');
     } catch (err) {
@@ -327,7 +327,7 @@ function ImageDetails() {
               <span className="px-3 py-1 rounded-full text-sm bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
                 {image.category.charAt(0).toUpperCase() + image.category.slice(1)}
               </span>
-              {image.tags && image.tags.map(tag => (
+              {image.tags && Array.isArray(image.tags) && image.tags.map(tag => (
                 <Link
                   key={tag}
                   to={`/gallery?search=${tag}`}
@@ -367,7 +367,7 @@ function ImageDetails() {
             </form>
             
             {/* Comments List */}
-            {image.comments && image.comments.length > 0 ? (
+            {image.comments && Array.isArray(image.comments) && image.comments.length > 0 ? (
               <div className="space-y-4">
                 {image.comments.map((comment, index) => (
                   <div key={index} className="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0">

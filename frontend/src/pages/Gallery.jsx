@@ -62,9 +62,9 @@ function Gallery() {
         // Update URL search params
         setSearchParams(queryParams);
         
-        const { data } = await axios.get(`/api/images?${queryParams.toString()}`);
+        const { data } = await axios.get(`/images?${queryParams.toString()}`);
         
-        setImages(data.images);
+        setImages(Array.isArray(data) ? data : (data?.images || []));
         setTotalImages(data.totalImages);
         setHasMore(data.pages > 1);
         setPage(1);
@@ -100,9 +100,10 @@ function Gallery() {
         queryParams.append('sortBy', sortBy);
       }
       
-      const { data } = await axios.get(`/api/images?${queryParams.toString()}`);
+      const { data } = await axios.get(`/images?${queryParams.toString()}`);
       
-      setImages([...images, ...data.images]);
+      const newImages = Array.isArray(data) ? data : (data?.images || []);
+      setImages([...images, ...newImages]);
       setHasMore(nextPage < data.pages);
       setPage(nextPage);
     } catch (err) {

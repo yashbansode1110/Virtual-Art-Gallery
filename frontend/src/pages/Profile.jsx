@@ -39,8 +39,8 @@ function Profile() {
         setLoadingImages(true);
         setImagesError(null);
         
-        const { data } = await axios.get(`/api/images?uploader=${user._id}`);
-        setUserImages(data.images);
+        const { data } = await axios.get(`/images?uploader=${user._id}`);
+        setUserImages(Array.isArray(data) ? data : (data?.images || []));
         setLoadingImages(false);
       } catch (err) {
         console.error('Error fetching user images:', err);

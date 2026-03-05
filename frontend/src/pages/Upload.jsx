@@ -79,7 +79,7 @@ function Upload() {
       formData.append('image', image);
       
       // Upload image
-      const { data } = await axios.post('/api/images/upload', formData, {
+      const { data } = await axios.post('/images/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

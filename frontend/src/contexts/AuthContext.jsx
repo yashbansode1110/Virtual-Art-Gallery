@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           
           // Get user data
-          const { data } = await axios.get('/api/auth/profile');
+          const { data } = await axios.get('/auth/profile');
           setUser(data);
         }
       } catch (error) {
@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
   // Register user
   const register = async (name, email, password) => {
     try {
-      const { data } = await axios.post('/api/auth/register', { name, email, password });
+      const { data } = await axios.post('/auth/register', { name, email, password });
       
       // Save token to local storage
       localStorage.setItem('token', data.token);
@@ -61,7 +61,7 @@ export function AuthProvider({ children }) {
   // Login user
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post('/api/auth/login', { email, password });
+      const { data } = await axios.post('/auth/login', { email, password });
       
       // Save token to local storage
       localStorage.setItem('token', data.token);
@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
         formData.append('profileImage', profileImage);
       }
       
-      const { data } = await axios.put('/api/auth/profile', formData, {
+      const { data } = await axios.put('/auth/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

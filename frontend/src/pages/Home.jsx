@@ -13,8 +13,8 @@ function Home() {
     const fetchFeaturedImages = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get('/api/images/featured');
-        setFeaturedImages(data.images || data);
+        const { data } = await axios.get('/images/featured');
+        setFeaturedImages(Array.isArray(data) ? data : (data?.images || []));
         setLoading(false);
       } catch (err) {
         console.error('Error fetching featured images:', err);
