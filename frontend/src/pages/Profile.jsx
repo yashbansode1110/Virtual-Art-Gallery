@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import ImageCard from '../components/common/ImageCard';
+import { getFullImageUrl } from '../utils/imageHelper';
 
 function Profile() {
   const navigate = useNavigate();
@@ -322,7 +323,7 @@ function Profile() {
                   <div className="w-32 h-32 mb-4">
                     {user.profileImage ? (
                       <img
-                        src={user.profileImage}
+                        src={getFullImageUrl(user.profileImage)}
                         alt={user.name}
                         className="w-full h-full rounded-full object-cover"
                       />
