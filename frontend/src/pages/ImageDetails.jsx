@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
+import { getFullImageUrl } from '../utils/imageHelper';
 
 function ImageDetails() {
   const { id } = useParams();
@@ -210,7 +211,7 @@ function ImageDetails() {
         {/* Image Section */}
         <div className="relative">
           <img
-            src={image.imageUrl}
+            src={getFullImageUrl(image.imageUrl)}
             alt={image.title}
             className="w-full object-contain max-h-[600px]"
           />
@@ -375,7 +376,7 @@ function ImageDetails() {
                       <div className="mr-3">
                         {comment.user.profileImage ? (
                           <img
-                            src={comment.user.profileImage}
+                            src={getFullImageUrl(comment.user.profileImage)}
                             alt={comment.user.name}
                             className="w-8 h-8 rounded-full object-cover"
                           />

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getFullImageUrl } from '../../utils/imageHelper';
 
 function ImageCard({ image }) {
   return (
@@ -6,7 +7,7 @@ function ImageCard({ image }) {
       <div className="relative pb-[75%] bg-gray-200 dark:bg-gray-700">
         <Link to={`/image/${image._id}`}>
           <img
-            src={image.imageUrl}
+            src={getFullImageUrl(image.imageUrl)}
             alt={image.title}
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"
