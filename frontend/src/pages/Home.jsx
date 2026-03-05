@@ -14,7 +14,7 @@ function Home() {
       try {
         setLoading(true);
         const { data } = await axios.get('/api/images/featured');
-        setFeaturedImages(data);
+        setFeaturedImages(data.images || data);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching featured images:', err);
