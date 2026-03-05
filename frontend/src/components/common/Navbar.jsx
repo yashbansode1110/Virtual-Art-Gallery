@@ -20,7 +20,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                Virtual Art Gallery
+                ArtPixel
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
